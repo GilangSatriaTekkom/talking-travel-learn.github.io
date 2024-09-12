@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  @apply text-[20px];
+}
+
+h1 {
+  @apply font-changaOne text-5xl font-bold;
+}
+p {
+  @apply text__secondary font-roboto text-base;
+}
+
+.color__primary {
+  @apply bg-[#8A53FF];
+}
+
+.color__secondary {
+  @apply bg-[#434343];
+}
+
+.text__primary {
+  @apply text-[#8A53FF];
+}
+
+.text__secondary {
+  @apply text-[#434343];
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
