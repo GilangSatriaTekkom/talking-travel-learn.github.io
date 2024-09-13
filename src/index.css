@@ -3,16 +3,32 @@
 @tailwind utilities;
 
 html {
-  @apply text-[20px];
+  @apply text-[16px] font-normal font-roboto;
 }
 
 h1 {
-  @apply font-changaOne text-5xl font-bold;
-}
-p {
-  @apply text__secondary font-roboto text-base;
+  @apply font-changaOne text-5xl;
 }
 
+h2 {
+  @apply font-changaOne text-[39px] text__secondary;
+}
+
+h3 {
+  @apply font-changaOne text-2xl text__secondary;
+}
+
+span {
+  @apply text__primary;
+}
+
+p {
+  @apply text__secondary font-roboto text-base text-[#434343] leading-8;
+}
+
+img {
+  @apply rounded-lg;
+}
 .color__primary {
   @apply bg-[#8A53FF];
 }

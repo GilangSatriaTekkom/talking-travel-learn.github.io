@@ -1,6 +1,6 @@
 export default function Header() {
   return (
-    <header className="container flex flex-row justify-between fixed top-0 left-0">
+    <header className="container flex flex-row justify-between sticky top-0 left-0 bg-white">
       <img src="../public/svg/header-logo.svg" alt="Header Logo" />
       <div className="flex flex-row items-center gap-4">
         <nav className="flex items-center">

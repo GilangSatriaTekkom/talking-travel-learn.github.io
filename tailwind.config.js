@@ -16,7 +16,7 @@ export default {
         sm: "1.5rem", // Padding for small screens
         md: "2rem", // Padding for medium screens
         lg: "2.5rem", // Padding for large screens
-        xl: "12rem", // Padding for extra large screens
+        xl: "6rem", // Padding for extra large screens
       },
     },
 
@@ -40,7 +40,12 @@ export default {
       "8xl": "6rem",
       "9xl": "8rem",
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        heroBackground: "url('./public/img/hero-background.png')",
+        formBackground: "url('./public/img/form-bg.png')",
+      },
+    },
   },
   plugins: [],
 };
