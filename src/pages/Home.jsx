@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import PlayButton from "../components/PlayButton";
 import SecondPlayButton from "../components/SecondPlayButton";
 import SubmitButton from "../components/SubmitButton";
-import Footer from "../components/footer";
+import Footer from "../components/Footer";
 
 export default function Home() {
   return (

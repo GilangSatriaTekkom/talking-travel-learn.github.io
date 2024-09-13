@@ -1,7 +1,7 @@
 export default function PlayButton() {
   return (
     <div className="w-[36px] h-[36px] bg-gray-300 flex place-content-center items-center rounded-full">
-      <a href={videoPopup}>
+      <a href="">
         <svg
           className="rounded-full w-[36px] h-[36px] bg-gray-50 "
           xmlns="http://www.w3.org/2000/svg"
