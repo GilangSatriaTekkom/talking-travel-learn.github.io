@@ -29,6 +29,19 @@ p {
 img {
   @apply rounded-lg;
 }
+
+li {
+  @apply text-[#495367];
+}
+
+li :active {
+  @apply text__primary;
+}
+
+nav li {
+  @apply scale-95 hover:scale-100 duration-200;
+}
+
 .color__primary {
   @apply bg-[#8A53FF];
 }
@@ -48,4 +61,55 @@ img {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+/* Styling untuk popup overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Styling konten popup */
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  text-align: center;
+}
+
+/* Styling input search */
+.search-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Tombol close */
+.close-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.open-search-btn {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
 }

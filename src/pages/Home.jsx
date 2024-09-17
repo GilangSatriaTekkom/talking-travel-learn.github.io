@@ -1,9 +1,14 @@
+import React from "react";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import PlayButton from "../components/PlayButton";
 import SecondPlayButton from "../components/SecondPlayButton";
 import SubmitButton from "../components/SubmitButton";
 import Footer from "../components/Footer";
+import Cards from "../components/Cards";
+import { cardList } from "../components/Cards";
+import RecentCard from "../components/RecentCard.jsx";
+import { recentCard } from "../components/RecentCard.jsx";
 
 export default function Home() {
   return (
@@ -22,9 +27,14 @@ export default function Home() {
             </p>
             <div className="mt-8 flex flex-row gap-6">
               <Button aria-label="Button for access to another page" />
-              <div className="flex flex-row gap-2 items-center text-center">
-                <PlayButton aria-label="Button for play video from the source"></PlayButton>
-                <p>Watch highlights</p>
+              <div className="flex flex-row gap-2 items-center text-center group">
+                <PlayButton
+                  aria-label="Button for play video from the source"
+                  className="group-hover:scale-105 hover:bg-black duration-200 cursor-pointer"
+                ></PlayButton>
+                <p className="group-hover:scale-105 duration-200 cursor-pointer">
+                  Watch highlights
+                </p>
               </div>
             </div>
           </div>
@@ -48,7 +58,9 @@ export default function Home() {
 
           <div className="flex flex-row items-center gap-3">
             <SecondPlayButton aria-label="Button for play video from the source"></SecondPlayButton>
-            <p className="text__primary">Watch Now</p>
+            <p className="text__primary hover:scale-105 duration-200 cursor-pointer">
+              Watch Now
+            </p>
           </div>
         </div>
       </section>
@@ -59,68 +71,11 @@ export default function Home() {
           <h2>Discover the world with us</h2>
         </div>
 
-        <div className="flex flex-row">
-          <div className="md:mt-6 w-1/4">
-            <div className="flex flex-col items-center gap-3">
-              <figure>
-                <img
-                  className="rounded-lg"
-                  src="../public/img/iceland-card-img.png"
-                  alt="Image of Iceland"
-                />
-              </figure>
-              <div className="text-center">
-                <h3>Iceland</h3>
-                <p className="text__primary">Discover</p>
-              </div>
-            </div>
-          </div>
-          <div className="md:mt-6 w-1/4">
-            <div className="flex flex-col items-center gap-3">
-              <figure>
-                <img
-                  className="rounded-lg"
-                  src="../public/img/Italy-card-img.png"
-                  alt="Image of Italy"
-                />
-              </figure>
-              <div className="text-center">
-                <h3>Italy</h3>
-                <p className="text__primary">Discover</p>
-              </div>
-            </div>
-          </div>
-          <div className="md:mt-6 w-1/4">
-            <div className="flex flex-col items-center gap-3">
-              <figure>
-                <img
-                  className="rounded-lg"
-                  src="../public/img/dubai-card-img.png"
-                  alt="Image of Dubai"
-                />
-              </figure>
-              <div className="text-center">
-                <h3>Dubai</h3>
-                <p className="text__primary">Discover</p>
-              </div>
-            </div>
-          </div>
-          <div className="md:mt-6 w-1/4">
-            <div className="flex flex-col items-center gap-3">
-              <figure>
-                <img
-                  className="rounded-lg"
-                  src="../public/img/patagonia-card-img.png"
-                  alt="Image of Patagonia"
-                />
-              </figure>
-              <div className="text-center">
-                <h3>Patagonia</h3>
-                <p className="text__primary">Discover</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ul className="flex flex-row">
+          {cardList.map((card, id) => (
+            <Cards key={id} path={card.path} name={card.name} alt={card.alt} />
+          ))}
+        </ul>
       </section>
 
       <section className="container bg-formBackground bg-cover">
@@ -205,53 +160,14 @@ export default function Home() {
           </div>
           <div className="w-1/2">
             <div className="flex flex-col gap-4 h-1/3">
-              <div className="flex flex-row gap-5 justify-evenly">
-                <figure>
-                  <img src="../public/img/tuscany-img.png" alt="" />
-                </figure>
-                <div className="md:w-[358px]">
-                  <h3 className="">Tuscany, Italy</h3>
-                  <p className="leading-normal mt-2text-[#576074]">
-                    The amazing Tuscany is home to famous Renaissance art and
-                    architecture and a vast scenic landscape.{" "}
-                    <span className="text-base">
-                      <a href="">view full blog...</a>
-                    </span>
-                  </p>
-                </div>
-              </div>
-              <div className="flex flex-row gap-5 justify-evenly">
-                <figure>
-                  <img src="../public/img/tokyo-img.png" alt="" />
-                </figure>
-                <div className="md:w-[358px]">
-                  <h3 className="">Tokyo, Japan</h3>
-                  <p className="leading-normal mt-2 text-[#576074]">
-                    Kyoto is well known for its temples, gardens, Shinto shrines
-                    and wooden houses. It’s time to visit tokyo. view full
-                    blog...{" "}
-                    <span className="text-base">
-                      <a href="">view full blog...</a>
-                    </span>
-                  </p>
-                </div>
-              </div>
-              <div className="flex flex-row gap-5 justify-evenly">
-                <figure>
-                  <img src="../public/img/lofoten-island-img.png" alt="" />
-                </figure>
-                <div className="md:w-[358px]">
-                  <h3 className="">Lofoten island, Norway</h3>
-                  <p className="leading-normal mt-2 text-[#576074]">
-                    Featuring razor-sharp peaks housing the arctic landscape.
-                    This astonishing island is perfect for your next postcard.
-                    view full blog...{" "}
-                    <span className="text-base">
-                      <a href="">view full blog...</a>
-                    </span>
-                  </p>
-                </div>
-              </div>
+              {recentCard.map((recent, id) => (
+                <RecentCard
+                  key={id}
+                  title={recent.title}
+                  description={recent.description}
+                  imagePath={recent.imagePath}
+                />
+              ))}
             </div>
           </div>
         </div>
