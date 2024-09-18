@@ -21,12 +21,12 @@ export const recentCard = [
 
 export default function RecentCard({ title, description, imagePath = 0 }) {
   return (
-    <div className="flex flex-row gap-5 justify-evenly">
-      <figure>
+    <div className="flex flex-row gap-5 justify-evenly group">
+      <figure className="group-hover:scale-105 duration-200">
         <img src={imagePath} alt="" />
       </figure>
       <div className="md:w-[358px]">
-        <h3 className="">{title}</h3>
+        <h3 className="group-hover:text-[#8A53FF] duration-200">{title}</h3>
         <p className="leading-normal mt-2text-[#576074]">
           {description}
           <span className="text-base">

@@ -1,15 +1,48 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 export default function Header() {
   const [isVisible, setIsVisible] = useState(false);
 
-  // Fungsi untuk toggle visibilitas div
-  const toggleDiv = () => {
+  // Gunakan useRef untuk mereferensikan elemen input
+  const inputRef = useRef(null);
+
+  // Fungsi untuk memfokuskan input
+  const handleButtonClick = () => {
+    inputRef.current.focus(); // Memunculkan kursor pada input
+  };
+
+  const toggleVisible = () => {
     setIsVisible(!isVisible);
   };
 
+  useEffect(() => {
+    console.log("isVisible:", isVisible);
+  }, [isVisible]);
+
+  const [query, setQuery] = useState("");
+  const [items, setItems] = useState([
+    "House in the city",
+    "Real Estate Investment",
+    "Apartment for sale",
+    "Luxury House",
+    "Condo in the suburbs",
+  ]);
+  const [filteredItems, setFilteredItems] = useState(items);
+
+  const toggleSearch = () => {
+    // Filter items based on the query
+    const filtered = items.filter((item) =>
+      item.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredItems(filtered);
+  };
+
+  const handleInputChange = (e) => {
+    setQuery(e.target.value);
+  };
+
   return (
-    <header className="container flex flex-row justify-between sticky top-0 left-0 bg-white">
+    <header className="container flex flex-row justify-between sticky top-0 left-0 bg-white z-20">
       <img src="./svg/header-logo.svg" alt="Header Logo" />
       <div className="flex flex-row items-center gap-4">
         <nav className="flex items-center border-r-2 pr-4">
@@ -29,8 +62,23 @@ export default function Header() {
           </ul>
         </nav>
 
-        {!isVisible && (
-          <div id="search" onClick={toggleDiv} className="icon-loop">
+        <div className="relative">
+          <input
+            id="inputSearch"
+            className={`pl-3 pr-8 border-b-2 pb-1 relative transition-opacity duration-300 ease-in-out ${
+              !isVisible ? " w-0 opacity-0" : "w-full opacity-100"
+            }`}
+            type="text"
+            ref={inputRef}
+            value={query}
+            onChange={handleInputChange}
+            placeholder="Search..."
+          />
+          <div
+            id="search-2"
+            onClick={toggleVisible}
+            className="absolute top-[2px] z-30 right-2"
+          >
             <svg
               aria-label="icon-loop"
               xmlns="http://www.w3.org/2000/svg"
@@ -47,36 +95,7 @@ export default function Header() {
               />
             </svg>
           </div>
-        )}
-        {isVisible && (
-          <div className="relative">
-            <input
-              className="w-92 rounded-full border-2 relative"
-              type="text"
-            />
-            <div
-              id="search-2"
-              onClick={toggleDiv}
-              className="absolute top-[2px] right-2"
-            >
-              <svg
-                aria-label="icon-loop"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="#8A53FF"
-                class="size-6"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-                />
-              </svg>
-            </div>
-          </div>
-        )}
+        </div>
         <div className="icon-user">
           <svg
             aria-label="icon-user"

@@ -45,6 +45,13 @@ export default {
         heroBackground: "url('./public/img/hero-background.png')",
         formBackground: "url('./public/img/form-bg.png')",
       },
+      transitionProperty: {
+        width: "width",
+      },
+
+      transitionTimingFunction: {
+        "in-out-cubic": "cubic-bezier(0.68, -0.55, 0.27, 1.55)",
+      },
     },
   },
   plugins: [],

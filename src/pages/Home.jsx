@@ -1,7 +1,9 @@
 import React from "react";
+import ReactPlayer from "react-player";
+import { useState, useEffect, useRef } from "react";
 import Button from "../components/Button";
 import Header from "../components/Header";
-import PlayButton from "../components/PlayButton";
+import HighlightButton from "../components/HighlightButton.jsx";
 import SecondPlayButton from "../components/SecondPlayButton";
 import SubmitButton from "../components/SubmitButton";
 import Footer from "../components/Footer";
@@ -11,6 +13,33 @@ import RecentCard from "../components/RecentCard.jsx";
 import { recentCard } from "../components/RecentCard.jsx";
 
 export default function Home() {
+  const [isVisible, setIsVisible] = useState(false);
+  const videoRef = useRef(null);
+  function toggleVideo() {
+    setIsVisible(!isVisible);
+  }
+  function exitVideo() {
+    setIsVisible(isVisible);
+  }
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (videoRef.current && !videoRef.current.contains(event.target)) {
+        setIsVisible(false);
+      }
+    };
+    if (isVisible) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+    console.log("isVisible:", isVisible);
+  }, [isVisible]);
+
   return (
     <>
       <Header />
@@ -28,10 +57,10 @@ export default function Home() {
             <div className="mt-8 flex flex-row gap-6">
               <Button aria-label="Button for access to another page" />
               <div className="flex flex-row gap-2 items-center text-center group">
-                <PlayButton
+                <HighlightButton
                   aria-label="Button for play video from the source"
                   className="group-hover:scale-105 hover:bg-black duration-200 cursor-pointer"
-                ></PlayButton>
+                ></HighlightButton>
                 <p className="group-hover:scale-105 duration-200 cursor-pointer">
                   Watch highlights
                 </p>
@@ -42,9 +71,15 @@ export default function Home() {
       </section>
 
       <section className="container flex flex-row md:py-[107px]">
-        <figure className="w-1/2">
-          <img src="./public/img/img1.png" alt="M an in himalaya" />
-        </figure>
+        <div className="rounded-2xl">
+          <ReactPlayer
+            playing={!isVisible}
+            muted={true}
+            loop={!isVisible}
+            url="../public/video/swiss.mp4"
+          />
+        </div>
+
         <div className="flex flex-col w-[580px] md:p-[30px] gap-6">
           <div className="gap-2">
             <p className="text__primary font-bold">FEATURED OUR DESTINATION</p>
@@ -56,12 +91,27 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="flex flex-row items-center gap-3">
+          <div
+            className="flex flex-row items-center gap-3"
+            onClick={toggleVideo}
+          >
             <SecondPlayButton aria-label="Button for play video from the source"></SecondPlayButton>
             <p className="text__primary hover:scale-105 duration-200 cursor-pointer">
               Watch Now
             </p>
           </div>
+
+          {isVisible && (
+            <div className="popup-overlay">
+              <div className="m-10 bg-white" ref={videoRef}>
+                <ReactPlayer
+                  controls
+                  muted={false}
+                  url="../public/video/swiss.mp4"
+                />
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
